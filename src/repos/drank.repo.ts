@@ -13,6 +13,14 @@ export const DrinkRepo = {
             }
         })
         return drink;
+    },
 
+    async getDrinks(userId: number) {
+        const drinks = await prisma.drank.findMany({
+            where: {
+                userId
+            }
+        });
+        return drinks;
     }
 }

@@ -10,6 +10,6 @@ export const createUser = async(
         const user = await userRepo.createUser(req.body.username, req.body.gender);
         res.status(201).json({msg: "User Created Successfully!", user: user});
     } catch (error) {
-        res.status(400).json(error);
+        res.status(400).json({msg: "There's something wrong"});
     }
 }
