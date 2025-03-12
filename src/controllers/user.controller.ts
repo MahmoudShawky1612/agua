@@ -7,8 +7,8 @@ export const createUser = async(
     next: NextFunction,
 ) =>{
     try {
-        const user = await userRepo.createUser(req.body.username);
-        res.status(201).json({msg: "User Created Successfully!"});
+        const user = await userRepo.createUser(req.body.username, req.body.gender);
+        res.status(201).json({msg: "User Created Successfully!", user: user});
     } catch (error) {
         res.status(400).json(error);
     }
