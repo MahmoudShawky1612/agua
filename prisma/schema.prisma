@@ -1,18 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model User {
   id          Int     @id @default(autoincrement())
   username    String
   gender      Gender
-  totalDrinks Int     @default(0)
   accuracy    Int     @default(0)
+  totalDrinks Int     @default(0)
   drinks      Drank[]
 }
 
@@ -20,11 +20,10 @@ model Drank {
   id       Int     @id @default(autoincrement())
   userId   Int
   day      String
-  time     Int
   isOnTime Boolean @default(false)
+  time     Int
   Litre    Int
-
-  user User @relation(fields: [userId], references: [id])
+  user     User    @relation(fields: [userId], references: [id])
 }
 
 enum Gender {

@@ -12,4 +12,20 @@ export const createUser = async(
     } catch (error) {
         res.status(400).json({msg: "There's something wrong"});
     }
+};
+
+export const getUser = async(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+) =>{
+    try {
+        const user = await userRepo.getUser(+req.params.userId);
+        res.status(200).json({msg: "Success", user: user});
+    } catch (error) {
+        res.status(400).json({msg: `There's something wrong ${error}`});
+    }
 }
+
+
+

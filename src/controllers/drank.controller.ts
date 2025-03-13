@@ -9,13 +9,13 @@ export const addDrink = async(
         const now = new Date();
         const time = now.getHours();
         const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        const onTimeHours = [4, 9, 12, 15, 18, 21];
+        const onTimeHours = [4, 9, 12, 15, 18, 20];
         const isOnTime = onTimeHours.includes(time)?true:false;
         const day = days[now.getDay()];
         const drank = await DrinkRepo.addDrink(+req.params.userId, day, time, isOnTime, 1);
-        res.status(201).json({ msg: "Good Work, Keep Going", drank: drank });
+         res.status(201).json({ msg: "Good Work, Keep Going", drank: drank });
     } catch (error) {
-        res.status(400).json({msg:"There's something wrong"})
+         res.status(400).json({msg:"There's something wrong"})
     }
 }
 

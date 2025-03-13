@@ -11,4 +11,12 @@ export const userRepo = {
     });
     return user;
   },
+  async getUser(userId: number){
+    const user = await prisma.user.findUnique({
+      where: {
+        id:userId,
+      }
+    });
+    return user;
+  }
 };
