@@ -8,12 +8,13 @@ datasource db {
 }
 
 model User {
-  id          Int     @id @default(autoincrement())
-  username    String
-  gender      Gender
-  accuracy    Int     @default(0)
-  totalDrinks Int     @default(0)
-  drinks      Drank[]
+  id           Int     @id @default(autoincrement())
+  username     String
+  gender       Gender
+  accuracy     Int     @default(0)
+  totalDrinks  Int     @default(0)
+  onTimeDrinks Int     @default(0)
+  drinks       Drank[]
 }
 
 model Drank {

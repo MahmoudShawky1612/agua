@@ -2,6 +2,16 @@ import { prisma } from "../db/PrismaClient";
 
 export const DrinkRepo = {
     async addDrink(userId: number,day: string, time: number, isOnTime: boolean, Litre: number){
+        
+        const drink = await prisma.drank.create({
+            data: {
+                userId,
+                day,
+                time,
+                isOnTime,
+                Litre,
+            }
+        });
         const totalDrinks = await prisma.drank.count({
             where: {
               userId,
@@ -14,15 +24,6 @@ export const DrinkRepo = {
             },
           });
           const accuracy = (drinksOnTime*100)/totalDrinks;
-        const drink = await prisma.drank.create({
-            data: {
-                userId,
-                day,
-                time,
-                isOnTime,
-                Litre,
-            }
-        })
         await prisma.user.update({
             where:{
                 id: userId,
@@ -30,6 +31,7 @@ export const DrinkRepo = {
             data:{
                 totalDrinks,
                 accuracy,
+                onTimeDrinks: drinksOnTime,
             }
         });
         return drink;
