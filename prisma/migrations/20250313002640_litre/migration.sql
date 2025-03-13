@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Drank" ALTER COLUMN "litre" DROP DEFAULT;

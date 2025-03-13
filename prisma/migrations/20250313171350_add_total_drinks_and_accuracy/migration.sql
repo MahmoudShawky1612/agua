@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "accuracy" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "totalDrinks" INTEGER NOT NULL DEFAULT 0;
