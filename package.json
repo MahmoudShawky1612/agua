@@ -5,7 +5,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/server.ts",
-    "start": "npm run build && node build/server.js"
+    "start": "npm run build && node build/server.js",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
