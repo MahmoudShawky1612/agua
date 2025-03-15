@@ -6,5 +6,7 @@ const router = express.Router();
 
 router.use('/user', user);
 router.use('/drink', drink);
-
+router.get('/', (req, res) => {
+    res.send("testing");
+})
 export default router;
