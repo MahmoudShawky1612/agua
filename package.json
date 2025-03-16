@@ -5,8 +5,7 @@
   "build": "tsc",
   "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/server.ts",
   "start": "node build/server.js",
-  "postinstall": "prisma generate",
-  "vercel-build":"echo dodje"
+  "postinstall": "prisma generate"
 }
 ,
   "keywords": [],
