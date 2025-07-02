@@ -3,7 +3,7 @@ import { DrinkRepo } from "../repos/drank.repo";
 
 export const addDrink = async (req: Request, res: Response) => {
   try {
-    const { drinkTime } = req.body; // e.g. { '2025-07-07T15:00:00.000': 3 }
+    const { drinkTime, day } = req.body; // e.g. { '2025-07-07T15:00:00.000': 3 }
 
     const isoString = Object.keys(drinkTime)[0]; // '2025-07-07T15:00:00.000'
     const drinkHour = new Date(isoString).getHours(); // 15
@@ -22,17 +22,7 @@ export const addDrink = async (req: Request, res: Response) => {
 
     const isOnTime = onTime[drinkHour] === drinkValue;
 
-    const days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    const day = days[serverTime.getDay()];
-
+ 
     console.log(
       "Frontend Hour:",
       drinkHour,
