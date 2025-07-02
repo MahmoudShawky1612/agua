@@ -1,6 +1,6 @@
 import { prisma } from "../db/PrismaClient";
 
-import { Gender } from "d:/programming/agua/node_modules/.prisma/client";
+import { Gender } from "@prisma/client";
 export const userRepo = {
   async createUser(username: string, gender: Gender) {
     const user = await prisma.user.create({
