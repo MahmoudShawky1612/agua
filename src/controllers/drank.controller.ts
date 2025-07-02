@@ -1,23 +1,37 @@
 import { Request, Response } from 'express';
 import { DrinkRepo } from '../repos/drank.repo';
 
-export const addDrink = async(
-    req: Request,
-    res: Response,
-) => {
+ 
+export const addDrink = async (req: Request, res: Response) => {
     try {
-        const now = new Date();
-        const time = now.getHours();
+        const { drinkTime } = req.body;
+        if (!drinkTime) {
+            return res.status(400).json({ msg: "drinkTime is required" });
+        }
+
+        const frontendTime = new Date(drinkTime);
+        const serverTime = new Date();
+
+        if (isNaN(frontendTime.getTime())) {
+            return res.status(400).json({ msg: "Invalid drinkTime provided" });
+        }
+
+        const frontendHour = frontendTime.getHours();
+        const serverHour = serverTime.getHours();
+        const isOnTime = frontendHour === serverHour;
+
         const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        const onTimeHours = [1, 7, 10, 13, 16, 21];
-        const isOnTime = onTimeHours.includes(time)?true:false;
-        const day = days[now.getDay()];
-        const drank = await DrinkRepo.addDrink(+req.params.userId, day, time, isOnTime, 1);
-         res.status(201).json({ msg: "Good Work, Keep Going", drank: drank });
+        const day = days[serverTime.getDay()];
+
+        console.log("Frontend Hour:", frontendHour, "Server Hour:", serverHour, "Is on time:", isOnTime, "Day:", day);
+
+        const drank = await DrinkRepo.addDrink(+req.params.userId, day, frontendHour, isOnTime, 1);
+        return res.status(201).json({ msg: "Good Work, Keep Going", drank });
     } catch (error) {
-         res.status(400).json({msg:"There's something wrong"})
+        console.error("Error adding drink:", error);
+        return res.status(400).json({ msg: "There's something wrong" });
     }
-}
+};
 
 export const getDrinks = async(
     req: Request,
